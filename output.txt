@@ -1,8 +1,32 @@
-Script started on 2021-05-06 15:20:06-04:00
-]0;cdaniel@br012:~/CISC372_hw5[cdaniel@r001 CISC372_hw5]$ ./i[Kmp pic1.jpg edge
-Took 7 seconds.]0;cdaniel@br012:~/CISC372_hw5[cdaniel@r001 CISC372_hw5]$ ./pthread pic1.jpg edge
-Took 0 seconds
-]0;cdaniel@br012:~/CISC372_hw5[cdaniel@r001 CISC372_hw5]$ exit
+Script started on 2021-05-06 15:40:22-04:00
+ 
+Projects
+------------------------------------------------------------
+Project: see200002p PI: Stephen Siegel ***** default charging project *****
+  GPU                          465 SU remain of 465 SU          active: Yes
+  Regular Memory            30,334 SU remain of 30,356 SU       active: Yes
+  Ocean /ocean/projects/see200002p 388k used of 1000G
+
+]0;cdaniel@br014:~/CISC372_hw5[cdaniel@bridges2-login014 CISC372_hw5]$ interact --ntasks-per-node=4
+
+A command prompt will appear when your session begins
+"Ctrl+d" or "exit" will end your session
+
+--ntasks-per-node=4 --partition RM-small,RM-shared
+salloc -J Interact --ntasks-per-node=4 --partition RM-small,RM-shared
+salloc: Pending job allocation 1067737
+salloc: job 1067737 queued and waiting for resources
+salloc: job 1067737 has been allocated resources
+salloc: Granted job allocation 1067737
+salloc: Waiting for resource configuration
+salloc: Nodes r001 are ready for job
+]0;cdaniel@br014:~/CISC372_hw5[cdaniel@r001 CISC372_hw5]$ ./pthread pic1.jpg edge
+Took 4 seconds
+]0;cdaniel@br014:~/CISC372_hw5[cdaniel@r001 CISC372_hw5]$ ./mp pic1.jpg edge
+Took 8 seconds.]0;cdaniel@br014:~/CISC372_hw5[cdaniel@r001 CISC372_hw5]$ exit
+exit
+esalloc: Relinquishing job allocation 1067737
+]0;cdaniel@br014:~/CISC372_hw5[cdaniel@bridges2-login014 CISC372_hw5]$ xit[K[K[Kexit
 exit
 
-Script done on 2021-05-06 15:20:41-04:00
+Script done on 2021-05-06 15:41:21-04:00
