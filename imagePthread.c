@@ -147,17 +147,19 @@ int main(int argc,char** argv){
         }
     }        
     t1=time(NULL);
+    //printf("%ld\n", t1);
     for (threadCount = 0; threadCount < numThreads; threadCount++) {
         pthread_join(threads[threadCount], NULL);
     }
 
-    t2 = time(NULL);    
-
+    //t2 = time(NULL);    
+   
     stbi_write_png("output.png",destImage->width,destImage->height,destImage->bpp,destImage->data,destImage->bpp*destImage->width);
     stbi_image_free(srcImage->data);
     
     free(destImage->data);
-    //t2=time(NULL);
+    t2=time(NULL);
+     //printf("%ld\n", t2);
     free(threads);
     pthread_mutex_destroy(&mutex);
     printf("Took %ld seconds\n",t2-t1);
