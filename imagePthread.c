@@ -16,7 +16,7 @@ Image *srcImage;
 Image *destImage;
 enum KernelTypes kernelType;
 long numThreads;
-long pixelsOnThread;
+long pixelsOnThread = 375;
 long pixelsOnRow;
 long totalPixels;
 pthread_mutex_t mutex;
@@ -78,7 +78,7 @@ void *convolute(void *rank){
         for (pix = startPixel, span = pix; pix < endPixel; pix++, span++) {
             for (bit = 0; bit < srcImage->bpp; bit++) {
                 if (span >= pixelsOnRow) {
-                    span = span % pixelsOnRow;
+                    span %= pixelsOnRow;
                 } destImage->data[Index(pix,row,srcImage->width,bit,srcImage->bpp)]=getPixelValue(srcImage,pix,row,bit,algorithms[kernelType]);                
             }
         }
@@ -129,7 +129,7 @@ int main(int argc,char** argv){
         printf("Error loading file %s.\n",fileName);
         return -1;
     }
-
+    pixelsOnThread = 375;
     pixelsOnRow = srcImage->width;
     numThreads = totalPixels / pixelsOnThread;
     threads = (pthread_t *) malloc(sizeof(pthread_t) * numThreads);
@@ -162,3 +162,6 @@ int main(int argc,char** argv){
     printf("Took %ld seconds\n",t2-t1);
    return 0;
 }
+
+//gcc -g imageMP.c -o mp -lm -fopenmp
+//gcc -g imagePthread.c -o pthread -lm -pthread
