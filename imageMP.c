@@ -68,7 +68,7 @@ void convolute(Image* srcImage,Image* destImage,Matrix algorithm){
     int threads = omp_get_num_threads();
     int start = (srcImage->height / threads) * rank;
     int localEnd = (srcImage->height / threads) * (rank + 1);
-    int end = min(localEnd, srcImage->height);
+    int end = fmin(localEnd, srcImage->height);
     span = srcImage->bpp *srcImage->bpp;
     for (row=0;row<srcImage->height;row++){
         for (pix=0;pix<srcImage->width;pix++){

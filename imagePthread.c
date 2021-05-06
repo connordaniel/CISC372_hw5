@@ -15,7 +15,7 @@
 Image *srcImage;
 Image *destImage;
 enum KernelTypes kernelType;
-long threads;
+long numThreads;
 long pixelsOnThread;
 long pixelsOnRow;
 long totalPixels;
@@ -131,22 +131,22 @@ int main(int argc,char** argv){
     }
 
     pixelsOnRow = srcImage->width;
-    threads = totalPixels / pixelsOnThread;
-    threads = (pthread_t *) malloc(sizeof(pthread_t) * threadCount);
+    numThreads = totalPixels / pixelsOnThread;
+    threads = (pthread_t *) malloc(sizeof(pthread_t) * numThreads);
 
     destImage->bpp=srcImage->bpp;
     destImage->height=srcImage->height;
     destImage->width=srcImage->width;
     destImage->data=malloc(sizeof(uint8_t)*destImage->width*destImage->bpp*destImage->height);
 
-    for (threadCount = 0; threadCount < threads; threadCount++ ) {
+    for (threadCount = 0; threadCount < numThreads; threadCount++ ) {
         if (pthread_create(&threads[threadCount], NULL, &convolute, (void *) threadCount) != 0) {
             perror("pthread_create() error");
             exit(1);
         }
     }
 
-    for (threadCount = 0; threadCount < threads; threadCount++) {
+    for (threadCount = 0; threadCount < numThreads; threadCount++) {
         pthread_join(threads[threadCount], NULL);
     }
 
