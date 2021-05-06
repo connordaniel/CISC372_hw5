@@ -108,7 +108,6 @@ enum KernelTypes GetKernelType(char* type){
 //argv is expected to take 2 arguments.  First is the source file name (can be jpg, png, bmp, tga).  Second is the lower case name of the algorithm.
 int main(int argc,char** argv){
     long t1,t2;
-    t1=time(NULL);
     long threadCount;
     pthread_t *threads;
 
@@ -134,6 +133,8 @@ int main(int argc,char** argv){
     numThreads = totalPixels / pixelsOnThread;
     threads = (pthread_t *) malloc(sizeof(pthread_t) * numThreads);
 
+    destImage = (Image *)malloc(sizeof(Image));
+    
     destImage->bpp=srcImage->bpp;
     destImage->height=srcImage->height;
     destImage->width=srcImage->width;
@@ -144,8 +145,8 @@ int main(int argc,char** argv){
             perror("pthread_create() error");
             exit(1);
         }
-    }
-
+    }        
+    t1=time(NULL);
     for (threadCount = 0; threadCount < numThreads; threadCount++) {
         pthread_join(threads[threadCount], NULL);
     }
